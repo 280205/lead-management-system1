@@ -6,24 +6,28 @@ const prisma = new PrismaClient();
 const sources = ['WEBSITE', 'FACEBOOK_ADS', 'GOOGLE_ADS', 'REFERRAL', 'EVENTS', 'OTHER'];
 const statuses = ['NEW', 'CONTACTED', 'QUALIFIED', 'LOST', 'WON'];
 const companies = [
-  'TechFlow Solutions', 'NextGen Digital', 'CloudSync Technologies', 'DataStream Analytics',
-  'InnovateLabs Inc', 'CyberGuard Pro', 'WebCraft Studios', 'AppForge Technologies',
-  'EcommerceHub', 'MarketPulse Agency', 'ConsultPro Group', 'FinanceWorks LLC',
-  'MedTech Innovations', 'EduPlatform Solutions', 'RetailConnect Systems',
-  'LogiTech Services', 'GreenEnergy Corp', 'ConstructPro Ltd', 'FoodService Plus',
-  'TravelTech Solutions', 'SportsTech Inc', 'MediaFlow Agency', 'AutoTech Systems',
-  'PropTech Ventures', 'AgriTech Solutions', 'FashionForward LLC', 'HealthSync Pro',
-  'FinTech Innovations', 'RealEstate Plus', 'Manufacturing Pro'
+  'TechMahindra Solutions', 'Infosys Digital', 'Wipro Technologies', 'HCL Analytics',
+  'TCS Innovations', 'Mindtree Labs', 'L&T Infotech', 'Mphasis Technologies',
+  'Bharti Enterprises', 'Reliance Industries', 'Adani Group', 'Tata Consultancy',
+  'Bajaj Finserv', 'HDFC Solutions', 'ICICI Tech', 'SBI Services',
+  'Flipkart Commerce', 'Paytm Payments', 'Ola Mobility', 'Zomato Food Tech',
+  'Byju\'s Education', 'Unacademy Learning', 'Swiggy Delivery', 'BigBasket Retail',
+  'Nykaa Beauty', 'PharmEasy Health', 'PolicyBazaar Insurance', 'MakeMyTrip Travel',
+  'RedBus Transport', 'BookMyShow Entertainment', 'Delhivery Logistics', 'Freshworks Software',
+  'Zoho Corporation', 'Mu Sigma Analytics', 'Genpact Services', 'Tech Mahindra'
 ];
 
 const cities = [
-  'New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia',
-  'San Antonio', 'San Diego', 'Dallas', 'San Jose', 'Austin', 'Jacksonville',
-  'Fort Worth', 'Columbus', 'Charlotte', 'San Francisco', 'Indianapolis', 'Seattle'
+  'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata',
+  'Pune', 'Ahmedabad', 'Jaipur', 'Surat', 'Lucknow', 'Kanpur',
+  'Nagpur', 'Indore', 'Thane', 'Bhopal', 'Visakhapatnam', 'Patna',
+  'Vadodara', 'Ghaziabad', 'Ludhiana', 'Agra', 'Nashik', 'Faridabad',
+  'Meerut', 'Rajkot', 'Kalyan', 'Vasai', 'Varanasi', 'Srinagar'
 ];
 
 const states = [
-  'NY', 'CA', 'IL', 'TX', 'AZ', 'PA', 'FL', 'OH', 'NC', 'WA', 'IN', 'GA'
+  'MH', 'DL', 'KA', 'TG', 'TN', 'WB', 'GJ', 'RJ', 'UP', 'MP',
+  'AP', 'OR', 'KL', 'AS', 'PB', 'HR', 'JH', 'BR', 'UK', 'HP'
 ];
 
 // Generate random data helpers
@@ -31,30 +35,30 @@ const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 const getRandomFloat = (min, max) => (Math.random() * (max - min) + min).toFixed(2);
 
-// Realistic first and last names for leads
+// Indian first and last names for leads
 const firstNames = [
-  'James', 'Mary', 'John', 'Patricia', 'Robert', 'Jennifer', 'Michael', 'Linda',
-  'William', 'Elizabeth', 'David', 'Barbara', 'Richard', 'Susan', 'Joseph', 'Jessica',
-  'Thomas', 'Sarah', 'Christopher', 'Karen', 'Charles', 'Nancy', 'Daniel', 'Lisa',
-  'Matthew', 'Betty', 'Anthony', 'Helen', 'Mark', 'Sandra', 'Donald', 'Donna',
-  'Steven', 'Carol', 'Paul', 'Ruth', 'Andrew', 'Sharon', 'Joshua', 'Michelle',
-  'Kenneth', 'Laura', 'Kevin', 'Sarah', 'Brian', 'Kimberly', 'George', 'Deborah',
-  'Timothy', 'Dorothy', 'Ronald', 'Lisa', 'Jason', 'Nancy', 'Edward', 'Karen'
+  'Rahul', 'Priya', 'Amit', 'Sneha', 'Rohit', 'Anita', 'Vikash', 'Kavita',
+  'Sunil', 'Meera', 'Ajay', 'Pooja', 'Ravi', 'Sunita', 'Manoj', 'Rekha',
+  'Deepak', 'Neha', 'Sanjay', 'Geeta', 'Anil', 'Shweta', 'Vijay', 'Nisha',
+  'Prakash', 'Ritu', 'Ashok', 'Seema', 'Raj', 'Kiran', 'Naveen', 'Preeti',
+  'Sandeep', 'Asha', 'Rajeev', 'Suman', 'Arun', 'Madhuri', 'Vishal', 'Sonia',
+  'Nitin', 'Vandana', 'Manish', 'Swati', 'Ramesh', 'Jyoti', 'Kamal', 'Sapna',
+  'Pankaj', 'Bharti', 'Dinesh', 'Rakhi', 'Subhash', 'Mamta', 'Yogesh', 'Chhaya'
 ];
 
 const lastNames = [
-  'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis',
-  'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson',
-  'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin', 'Lee', 'Perez', 'Thompson',
-  'White', 'Harris', 'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson', 'Walker',
-  'Young', 'Allen', 'King', 'Wright', 'Scott', 'Torres', 'Nguyen', 'Hill',
-  'Flores', 'Green', 'Adams', 'Nelson', 'Baker', 'Hall', 'Rivera', 'Campbell'
+  'Sharma', 'Verma', 'Singh', 'Kumar', 'Gupta', 'Agarwal', 'Pandey', 'Tiwari',
+  'Jain', 'Yadav', 'Mishra', 'Patel', 'Shah', 'Sinha', 'Chauhan', 'Joshi',
+  'Malhotra', 'Kapoor', 'Arora', 'Bansal', 'Chopra', 'Goel', 'Saxena', 'Bhatia',
+  'Khanna', 'Mittal', 'Aggarwal', 'Rastogi', 'Srivastava', 'Tripathi', 'Chandra', 'Dubey',
+  'Shukla', 'Thakur', 'Nair', 'Reddy', 'Iyer', 'Menon', 'Prasad', 'Rao',
+  'Das', 'Ghosh', 'Sengupta', 'Mukherjee', 'Bhattacharya', 'Dutta', 'Roy', 'Bose'
 ];
 
 const generateRandomLead = (userId, index) => {
   const firstName = getRandomElement(firstNames);
   const lastName = getRandomElement(lastNames);
-  const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}${index}@${getRandomElement(['gmail.com', 'outlook.com', 'yahoo.com', 'company.com', 'business.net'])}`;
+  const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}${index}@${getRandomElement(['gmail.com', 'outlook.com', 'yahoo.com', 'rediffmail.com', 'hotmail.com', 'company.co.in'])}`;
   
   // Generate more realistic lead values based on source and status
   const status = getRandomElement(statuses);
@@ -62,21 +66,21 @@ const generateRandomLead = (userId, index) => {
   let leadValue = null;
   let score = getRandomNumber(20, 100);
   
-  // Adjust lead value and score based on status and source
+  // Adjust lead value and score based on status and source (in Indian Rupees)
   if (status === 'WON') {
-    leadValue = parseFloat(getRandomFloat(5000, 75000));
+    leadValue = parseFloat(getRandomFloat(400000, 6000000)); // ₹4L - ₹60L
     score = getRandomNumber(80, 100);
   } else if (status === 'QUALIFIED') {
-    leadValue = parseFloat(getRandomFloat(2000, 40000));
+    leadValue = parseFloat(getRandomFloat(160000, 3200000)); // ₹1.6L - ₹32L
     score = getRandomNumber(60, 90);
   } else if (status === 'CONTACTED') {
-    leadValue = parseFloat(getRandomFloat(1000, 25000));
+    leadValue = parseFloat(getRandomFloat(80000, 2000000)); // ₹80K - ₹20L
     score = getRandomNumber(40, 80);
   } else if (status === 'NEW') {
-    leadValue = parseFloat(getRandomFloat(500, 15000));
+    leadValue = parseFloat(getRandomFloat(40000, 1200000)); // ₹40K - ₹12L
     score = getRandomNumber(20, 70);
   } else { // LOST
-    leadValue = parseFloat(getRandomFloat(100, 5000));
+    leadValue = parseFloat(getRandomFloat(8000, 400000)); // ₹8K - ₹4L
     score = getRandomNumber(0, 40);
   }
 
@@ -84,7 +88,7 @@ const generateRandomLead = (userId, index) => {
     firstName,
     lastName,
     email,
-    phone: `(${getRandomNumber(200, 999)}) ${getRandomNumber(200, 999)}-${getRandomNumber(1000, 9999)}`,
+    phone: `+91 ${getRandomNumber(70000, 99999)}-${getRandomNumber(10000, 99999)}`,
     company: getRandomElement(companies),
     city: getRandomElement(cities),
     state: getRandomElement(states),
@@ -106,13 +110,13 @@ async function main() {
     const hashedPassword = await bcrypt.hash('password123', 12);
     
     const testUser = await prisma.user.upsert({
-      where: { email: 'test@leadmanagement.com' },
+      where: { email: 'admin@leadmanagement.co.in' },
       update: {},
       create: {
-        email: 'test@leadmanagement.com',
+        email: 'admin@leadmanagement.co.in',
         password: hashedPassword,
-        firstName: 'Test',
-        lastName: 'User'
+        firstName: 'Rahul',
+        lastName: 'Sharma'
       }
     });
 
@@ -146,7 +150,7 @@ async function main() {
 
     console.log('🎉 Database seeded successfully!');
     console.log('📧 Test user credentials:');
-    console.log('   Email: test@leadmanagement.com');
+    console.log('   Email: admin@leadmanagement.co.in');
     console.log('   Password: password123');
     console.log(`📈 Created ${createdCount} sample leads`);
 
