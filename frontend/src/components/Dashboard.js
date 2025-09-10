@@ -296,7 +296,7 @@ const Dashboard = () => {
       filter: 'agNumberColumnFilter',
       width: 120,
       cellRenderer: (params) => {
-        return params.value ? `$${Number(params.value).toLocaleString()}` : '-';
+        return params.value ? `₹${Number(params.value).toLocaleString()}` : '-';
       }
     },
     {

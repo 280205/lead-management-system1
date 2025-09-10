@@ -214,7 +214,7 @@ const FilterPanel = ({ filters, onFiltersChange }) => {
 
         {/* Lead Value Filter */}
         <div>
-          <label className="form-label">Lead Value ($)</label>
+          <label className="form-label">Lead Value (₹)</label>
           <div style={{ display: 'flex', gap: '8px' }}>
             <select
               value={localFilters.leadValue?.operator || 'equals'}
