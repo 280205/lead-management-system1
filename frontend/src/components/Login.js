@@ -120,7 +120,7 @@ const Login = () => {
               Test Credentials:
             </p>
             <p style={{ fontSize: '14px', color: '#6b7280' }}>
-              Email: test@leadmanagement.com<br />
+              Email: admin@leadmanagement.co.in<br />
               Password: password123
             </p>
           </div>
