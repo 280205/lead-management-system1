@@ -34,11 +34,11 @@ async function checkAndSetupDatabase() {
       }
     } catch (error) {
       if (error.code === 'P2021' || error.message.includes('does not exist')) {
-        console.log('🏗️ Tables do not exist, running migrations...');
+        console.log('🏗️ Tables do not exist, creating schema...');
         
-        // Run migrations programmatically
+        // Push schema to database (creates tables without migration files)
         const { execSync } = require('child_process');
-        execSync('npx prisma migrate deploy', { stdio: 'inherit' });
+        execSync('npx prisma db push --accept-data-loss', { stdio: 'inherit' });
         
         console.log('🌱 Seeding database...');
         await seedDatabase();

@@ -8,9 +8,9 @@
     "dev": "nodemon src/index.js",
     "build": "npx prisma generate",
     "generate": "npx prisma generate",
-    "migrate": "npx prisma migrate deploy", 
+    "db:push": "npx prisma db push",
     "seed": "node src/scripts/seed.js",
-    "setup": "npx prisma migrate deploy && npm run seed"
+    "setup": "npx prisma db push && npm run seed"
   },
   "dependencies": {
     "express": "^4.18.2",
