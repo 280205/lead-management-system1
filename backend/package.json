@@ -4,9 +4,9 @@
   "description": "Backend API for Lead Management System",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node startup.js",
     "dev": "nodemon src/index.js",
-    "build": "echo 'Build complete'",
+    "build": "npx prisma generate",
     "generate": "npx prisma generate",
     "migrate": "npx prisma migrate deploy", 
     "seed": "node src/scripts/seed.js",

@@ -1,28 +1,24 @@
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
-const { setupDatabase } = require('./src/scripts/setup-db');
+// Simple startup script for Railway deployment
+const { spawn } = require('child_process');
+const path = require('path');
 
-console.log('🚀 Starting Lead Management System...');
+console.log('🚀 Starting Lead Management System Backend...');
 
-async function start() {
-  try {
-    console.log('📦 Generating Prisma client...');
-    execSync('npx prisma generate', { stdio: 'inherit' });
-    
-    console.log('🗄️ Setting up database directly...');
-    await setupDatabase();
-    
-    console.log('🌱 Seeding database...');
-    execSync('node src/scripts/seed.js', { stdio: 'inherit' });
-    
-    console.log('✅ Setup complete! Starting server...');
-    execSync('node src/index.js', { stdio: 'inherit' });
-    
-  } catch (error) {
-    console.error('❌ Startup failed:', error.message);
-    process.exit(1);
-  }
-}
+// Start the main application
+const app = spawn('node', ['src/index.js'], {
+  cwd: __dirname,
+  stdio: 'inherit',
+  env: { ...process.env }
+});
 
-start();
+app.on('exit', (code) => {
+  console.log(`Application exited with code ${code}`);
+  process.exit(code);
+});
+
+app.on('error', (err) => {
+  console.error('Failed to start application:', err);
+  process.exit(1);
+});
