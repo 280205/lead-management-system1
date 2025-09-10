@@ -1,7 +1,9 @@
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  log: ['query', 'info', 'warn', 'error'],
+});
 
 const sources = ['WEBSITE', 'FACEBOOK_ADS', 'GOOGLE_ADS', 'REFERRAL', 'EVENTS', 'OTHER'];
 const statuses = ['NEW', 'CONTACTED', 'QUALIFIED', 'LOST', 'WON'];
@@ -54,6 +56,10 @@ async function main() {
   console.log('🌱 Starting database seed...');
 
   try {
+    // Test database connection
+    await prisma.$connect();
+    console.log('✅ Database connection established');
+    
     // Check if data already exists
     const existingUser = await prisma.user.findUnique({
       where: { email: 'test@leadmanagement.com' }
