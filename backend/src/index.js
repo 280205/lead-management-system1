@@ -56,25 +56,17 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// One-time setup endpoint (for free tier users without shell access)
-app.get('/api/setup-database', async (req, res) => {
-  try {
-    // Run the seed script
-    const { execSync } = require('child_process');
-    const output = execSync('npm run seed', { encoding: 'utf8' });
-    
-    res.json({
-      success: true,
-      message: 'Database setup completed successfully!',
-      output: output
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'Database setup failed',
-      error: error.message
-    });
-  }
+// Test API endpoint
+app.get('/api', (req, res) => {
+  res.status(200).json({ 
+    message: 'Lead Management API is running!',
+    status: 'OK',
+    endpoints: {
+      auth: '/api/auth',
+      leads: '/api/leads',
+      health: '/api/health'
+    }
+  });
 });
 
 // API routes
