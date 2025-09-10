@@ -7,7 +7,7 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "build": "npx prisma generate",
-    "postbuild": "npx prisma migrate deploy",
+    "postbuild": "echo 'Build complete - migrations will run at startup'",
     "migrate": "npx prisma migrate deploy", 
     "generate": "npx prisma generate",
     "seed": "node src/scripts/seed.js",
