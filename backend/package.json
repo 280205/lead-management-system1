@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "npm run setup && node src/index.js",
-    "setup": "npx prisma generate && npx prisma migrate deploy && node src/scripts/seed.js",
+    "setup": "npx prisma generate && npx prisma db push && node src/scripts/seed.js",
     "dev": "nodemon src/index.js",
     "build": "npx prisma generate",
     "postbuild": "npx prisma migrate deploy",
