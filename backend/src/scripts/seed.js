@@ -54,6 +54,25 @@ async function main() {
   console.log('🌱 Starting database seed...');
 
   try {
+    // Check if data already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email: 'test@leadmanagement.com' }
+    });
+
+    if (existingUser) {
+      const leadCount = await prisma.lead.count({
+        where: { userId: existingUser.id }
+      });
+      
+      if (leadCount >= 100) {
+        console.log('✅ Database already seeded with', leadCount, 'leads');
+        console.log('📧 Test user credentials:');
+        console.log('   Email: test@leadmanagement.com');
+        console.log('   Password: password123');
+        return;
+      }
+    }
+
     // Create test user
     const hashedPassword = await bcrypt.hash('password123', 12);
     
