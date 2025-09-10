@@ -120,7 +120,7 @@ const LeadForm = ({ lead, onSubmit, onClose }) => {
                 {...register('firstName', { 
                   required: 'First name is required' 
                 })}
-                placeholder="John"
+                placeholder="Nitin"
               />
               {errors.firstName && (
                 <p style={{ color: '#ef4444', fontSize: '14px', marginTop: '4px' }}>
@@ -140,7 +140,7 @@ const LeadForm = ({ lead, onSubmit, onClose }) => {
                 {...register('lastName', { 
                   required: 'Last name is required' 
                 })}
-                placeholder="Doe"
+                placeholder="Pandey"
               />
               {errors.lastName && (
                 <p style={{ color: '#ef4444', fontSize: '14px', marginTop: '4px' }}>
@@ -165,7 +165,7 @@ const LeadForm = ({ lead, onSubmit, onClose }) => {
                   message: 'Please enter a valid email'
                 }
               })}
-              placeholder="john@example.com"
+              placeholder="nitin@example.com"
             />
             {errors.email && (
               <p style={{ color: '#ef4444', fontSize: '14px', marginTop: '4px' }}>
@@ -184,7 +184,7 @@ const LeadForm = ({ lead, onSubmit, onClose }) => {
                 type="tel"
                 className="form-input"
                 {...register('phone')}
-                placeholder="+1-234-567-8900"
+                placeholder="+91-9876543210"
               />
             </div>
 
@@ -197,7 +197,7 @@ const LeadForm = ({ lead, onSubmit, onClose }) => {
                 type="text"
                 className="form-input"
                 {...register('company')}
-                placeholder="Acme Inc"
+                placeholder="Erino"
               />
             </div>
           </div>
@@ -212,7 +212,7 @@ const LeadForm = ({ lead, onSubmit, onClose }) => {
                 type="text"
                 className="form-input"
                 {...register('city')}
-                placeholder="New York"
+                placeholder="Gandhinagar"
               />
             </div>
 
@@ -225,7 +225,7 @@ const LeadForm = ({ lead, onSubmit, onClose }) => {
                 type="text"
                 className="form-input"
                 {...register('state')}
-                placeholder="NY"
+                placeholder="Gujarat"
               />
             </div>
           </div>
@@ -294,7 +294,7 @@ const LeadForm = ({ lead, onSubmit, onClose }) => {
 
             <div>
               <label className="form-label" htmlFor="leadValue">
-                Lead Value ($)
+                Lead Value (₹)
               </label>
               <input
                 id="leadValue"
