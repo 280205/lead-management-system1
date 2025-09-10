@@ -1,17 +1,19 @@
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
 
-const prisma = new PrismaClient({
-  log: ['query', 'info', 'warn', 'error'],
-});
+const prisma = new PrismaClient();
 
 const sources = ['WEBSITE', 'FACEBOOK_ADS', 'GOOGLE_ADS', 'REFERRAL', 'EVENTS', 'OTHER'];
 const statuses = ['NEW', 'CONTACTED', 'QUALIFIED', 'LOST', 'WON'];
 const companies = [
-  'Tech Innovations Inc', 'Digital Solutions LLC', 'Cloud Services Corp', 
-  'Data Analytics Pro', 'Software Systems Ltd', 'AI Ventures', 'Cyber Security Plus',
-  'Web Development Co', 'Mobile Apps Inc', 'E-commerce Solutions', 'Marketing Agency Pro',
-  'Consulting Group', 'Financial Services', 'Healthcare Tech', 'Education Platform'
+  'TechFlow Solutions', 'NextGen Digital', 'CloudSync Technologies', 'DataStream Analytics',
+  'InnovateLabs Inc', 'CyberGuard Pro', 'WebCraft Studios', 'AppForge Technologies',
+  'EcommerceHub', 'MarketPulse Agency', 'ConsultPro Group', 'FinanceWorks LLC',
+  'MedTech Innovations', 'EduPlatform Solutions', 'RetailConnect Systems',
+  'LogiTech Services', 'GreenEnergy Corp', 'ConstructPro Ltd', 'FoodService Plus',
+  'TravelTech Solutions', 'SportsTech Inc', 'MediaFlow Agency', 'AutoTech Systems',
+  'PropTech Ventures', 'AgriTech Solutions', 'FashionForward LLC', 'HealthSync Pro',
+  'FinTech Innovations', 'RealEstate Plus', 'Manufacturing Pro'
 ];
 
 const cities = [
@@ -29,25 +31,69 @@ const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 const getRandomFloat = (min, max) => (Math.random() * (max - min) + min).toFixed(2);
 
+// Realistic first and last names for leads
+const firstNames = [
+  'James', 'Mary', 'John', 'Patricia', 'Robert', 'Jennifer', 'Michael', 'Linda',
+  'William', 'Elizabeth', 'David', 'Barbara', 'Richard', 'Susan', 'Joseph', 'Jessica',
+  'Thomas', 'Sarah', 'Christopher', 'Karen', 'Charles', 'Nancy', 'Daniel', 'Lisa',
+  'Matthew', 'Betty', 'Anthony', 'Helen', 'Mark', 'Sandra', 'Donald', 'Donna',
+  'Steven', 'Carol', 'Paul', 'Ruth', 'Andrew', 'Sharon', 'Joshua', 'Michelle',
+  'Kenneth', 'Laura', 'Kevin', 'Sarah', 'Brian', 'Kimberly', 'George', 'Deborah',
+  'Timothy', 'Dorothy', 'Ronald', 'Lisa', 'Jason', 'Nancy', 'Edward', 'Karen'
+];
+
+const lastNames = [
+  'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis',
+  'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson',
+  'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin', 'Lee', 'Perez', 'Thompson',
+  'White', 'Harris', 'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson', 'Walker',
+  'Young', 'Allen', 'King', 'Wright', 'Scott', 'Torres', 'Nguyen', 'Hill',
+  'Flores', 'Green', 'Adams', 'Nelson', 'Baker', 'Hall', 'Rivera', 'Campbell'
+];
+
 const generateRandomLead = (userId, index) => {
-  const firstName = `Lead${index}`;
-  const lastName = `User${index}`;
-  const email = `lead${index}@example.com`;
+  const firstName = getRandomElement(firstNames);
+  const lastName = getRandomElement(lastNames);
+  const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}${index}@${getRandomElement(['gmail.com', 'outlook.com', 'yahoo.com', 'company.com', 'business.net'])}`;
   
+  // Generate more realistic lead values based on source and status
+  const status = getRandomElement(statuses);
+  const source = getRandomElement(sources);
+  let leadValue = null;
+  let score = getRandomNumber(20, 100);
+  
+  // Adjust lead value and score based on status and source
+  if (status === 'WON') {
+    leadValue = parseFloat(getRandomFloat(5000, 75000));
+    score = getRandomNumber(80, 100);
+  } else if (status === 'QUALIFIED') {
+    leadValue = parseFloat(getRandomFloat(2000, 40000));
+    score = getRandomNumber(60, 90);
+  } else if (status === 'CONTACTED') {
+    leadValue = parseFloat(getRandomFloat(1000, 25000));
+    score = getRandomNumber(40, 80);
+  } else if (status === 'NEW') {
+    leadValue = parseFloat(getRandomFloat(500, 15000));
+    score = getRandomNumber(20, 70);
+  } else { // LOST
+    leadValue = parseFloat(getRandomFloat(100, 5000));
+    score = getRandomNumber(0, 40);
+  }
+
   return {
     firstName,
     lastName,
     email,
-    phone: `+1-${getRandomNumber(200, 999)}-${getRandomNumber(100, 999)}-${getRandomNumber(1000, 9999)}`,
+    phone: `(${getRandomNumber(200, 999)}) ${getRandomNumber(200, 999)}-${getRandomNumber(1000, 9999)}`,
     company: getRandomElement(companies),
     city: getRandomElement(cities),
     state: getRandomElement(states),
-    source: getRandomElement(sources),
-    status: getRandomElement(statuses),
-    score: getRandomNumber(0, 100),
-    leadValue: parseFloat(getRandomFloat(100, 50000)),
+    source,
+    status,
+    score,
+    leadValue,
     lastActivityAt: Math.random() > 0.3 ? new Date(Date.now() - getRandomNumber(0, 90) * 24 * 60 * 60 * 1000) : null,
-    isQualified: Math.random() > 0.6,
+    isQualified: status === 'QUALIFIED' || status === 'WON' || (Math.random() > 0.7),
     userId
   };
 };
@@ -56,29 +102,6 @@ async function main() {
   console.log('🌱 Starting database seed...');
 
   try {
-    // Test database connection
-    await prisma.$connect();
-    console.log('✅ Database connection established');
-    
-    // Check if data already exists
-    const existingUser = await prisma.user.findUnique({
-      where: { email: 'test@leadmanagement.com' }
-    });
-
-    if (existingUser) {
-      const leadCount = await prisma.lead.count({
-        where: { userId: existingUser.id }
-      });
-      
-      if (leadCount >= 100) {
-        console.log('✅ Database already seeded with', leadCount, 'leads');
-        console.log('📧 Test user credentials:');
-        console.log('   Email: test@leadmanagement.com');
-        console.log('   Password: password123');
-        return;
-      }
-    }
-
     // Create test user
     const hashedPassword = await bcrypt.hash('password123', 12);
     
