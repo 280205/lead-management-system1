@@ -4,13 +4,14 @@
   "description": "Backend API for Lead Management System",
   "main": "src/index.js",
   "scripts": {
-    "start": "node startup.js",
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "build": "npx prisma generate",
     "postbuild": "npx prisma migrate deploy",
     "migrate": "npx prisma migrate deploy", 
     "generate": "npx prisma generate",
     "seed": "node src/scripts/seed.js",
+    "setup": "npx prisma migrate deploy && npm run seed",
     "deploy": "npm run generate && npm run migrate && npm run seed"
   },
   "dependencies": {
@@ -24,8 +25,7 @@
     "helmet": "^7.0.0",
     "express-rate-limit": "^6.8.1",
     "@prisma/client": "^5.2.0",
-    "prisma": "^5.2.0",
-    "pg": "^8.11.3"
+    "prisma": "^5.2.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
