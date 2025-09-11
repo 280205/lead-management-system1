@@ -306,28 +306,6 @@ npm run seed  # Run this after deployment to create test data
 - [x] Advanced filtering with multiple operators
 - [x] Proper error handling and loading states
 
-## Deployment
-
-### Live Demo
-- **Frontend**: Deploy to [Vercel](https://vercel.com)
-- **Backend**: Deploy to [Render](https://render.com) 
-- **Database**: PostgreSQL on Render
-
-### Quick Deploy Guide
-
-#### 1. Backend (Render)
-1. Push your code to GitHub
-2. Create new Web Service on Render
-3. Connect GitHub repo, set root directory to `backend`
-4. Set environment variables (see `.env.production`)
-5. Deploy automatically runs migrations and seeds data
-
-#### 2. Frontend (Vercel) 
-1. Create new project on Vercel
-2. Connect GitHub repo, set root directory to `frontend`
-3. Set `REACT_APP_API_URL` environment variable
-4. Deploy automatically
-
 ### Test Credentials (Production)
 ```
 Email: admin@leadmanagement.co.in
