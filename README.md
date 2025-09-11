@@ -162,7 +162,7 @@ lead-management-system/
    # App runs on http://localhost:3000
    ```
 
-## 📊 API Endpoints
+## API Endpoints
 
 ### Authentication
 ```
