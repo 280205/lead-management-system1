@@ -74,7 +74,7 @@ A full-stack Lead Management System built with React, Express.js, and PostgreSQL
 - Modal forms for create/edit
 - Responsive grid layout
 
-## 🏗 Project Structure
+## Project Structure
 
 ```
 lead-management-system/
