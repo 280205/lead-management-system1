@@ -4,12 +4,12 @@ A full-stack Lead Management System built with React, Express.js, and PostgreSQL
 
 ## Live Demo
 
-- **Frontend**: [Deploy URL will be here]
-- **Backend API**: [Deploy URL will be here]
+- **Frontend**: lead-management-system1-git-main-280205s-projects.vercel.app
+- **Backend API**:  lead-management-system1-production.up.railway.app
 
 ## Test Credentials
 
-- **Email**: test@leadmanagement.com
+- **Email**: admin@leadmanagement.co.in
 - **Password**: password123
 
 ## Tech Stack
@@ -330,7 +330,7 @@ npm run seed  # Run this after deployment to create test data
 
 ### Test Credentials (Production)
 ```
-Email: test@leadmanagement.com
+Email: admin@leadmanagement.co.in
 Password: password123
 ```
 
