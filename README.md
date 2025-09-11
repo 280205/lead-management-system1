@@ -2,17 +2,17 @@
 
 A full-stack Lead Management System built with React, Express.js, and PostgreSQL. Features include JWT authentication with httpOnly cookies, CRUD operations for leads, server-side pagination and filtering, and a professional data grid interface.
 
-## 🚀 Live Demo
+## Live Demo
 
 - **Frontend**: [Deploy URL will be here]
 - **Backend API**: [Deploy URL will be here]
 
-## 📧 Test Credentials
+## Test Credentials
 
 - **Email**: test@leadmanagement.com
 - **Password**: password123
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Frontend
 - React 18
@@ -36,43 +36,43 @@ A full-stack Lead Management System built with React, Express.js, and PostgreSQL
 - Backend: Render
 - Database: PostgreSQL (Render/Railway/Supabase)
 
-## ✨ Features
+## Features
 
 ### Authentication
-- ✅ User registration and login
-- ✅ JWT tokens stored in httpOnly cookies (not localStorage)
-- ✅ Secure password hashing with bcryptjs
-- ✅ Protected routes with proper 401 responses
-- ✅ Auto logout on token expiry
+- Use registration and login
+- JWT tokens stored in httpOnly cookies (not localStorage)
+- Secure password hashing with bcryptjs
+- Protected routes with proper 401 responses
+- Auto logout on token expiry
 
 ### Lead Management (CRUD)
-- ✅ Create, Read, Update, Delete leads
-- ✅ All required fields as per specification
-- ✅ Proper HTTP status codes (201, 200, 401, 404, etc.)
-- ✅ Input validation and error handling
+- Create, Read, Update, Delete leads
+- All required fields as per specification
+- Proper HTTP status codes (201, 200, 401, 404, etc.)
+- Input validation and error handling
 
 ### Data Grid & Pagination
-- ✅ Professional AG Grid interface
-- ✅ Server-side pagination (configurable page sizes)
-- ✅ Sortable columns
-- ✅ Responsive design
+- Professional AG Grid interface
+- Server-side pagination (configurable page sizes)
+- Sortable columns
+- Responsive design
 
 ### Advanced Filtering
-- ✅ Server-side filtering with multiple operators:
+- Server-side filtering with multiple operators:
   - **String fields**: equals, contains
   - **Enums**: equals, in
   - **Numbers**: equals, gt, lt, between
   - **Dates**: on, before, after, between
   - **Boolean**: equals
-- ✅ Multiple filters with AND logic
-- ✅ Real-time filter application
+- Multiple filters with AND logic
+-  Real-time filter application
 
 ### UI/UX
-- ✅ Clean, professional interface
-- ✅ Loading states and error handling
-- ✅ Toast notifications
-- ✅ Modal forms for create/edit
-- ✅ Responsive grid layout
+- Clean, professional interface
+- Loading states and error handling
+- Toast notifications
+- Modal forms for create/edit
+- Responsive grid layout
 
 ## 🏗 Project Structure
 
@@ -108,7 +108,7 @@ lead-management-system/
 └── README.md
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 18+
@@ -193,7 +193,7 @@ DELETE /api/leads/:id    # Delete lead
 ?filter_score={"operator":"between","value":50,"value2":90}
 ```
 
-## 🎯 Lead Model
+## Lead Model
 
 ```javascript
 {
@@ -216,7 +216,7 @@ DELETE /api/leads/:id    # Delete lead
 }
 ```
 
-## 🔒 Security Features
+## Security Features
 
 - JWT tokens in httpOnly cookies (XSS protection)
 - Password hashing with bcryptjs
@@ -226,7 +226,7 @@ DELETE /api/leads/:id    # Delete lead
 - Input validation and sanitization
 - SQL injection protection (Prisma ORM)
 
-## 🚀 Deployment
+## Deployment
 
 ### Backend (Render/Railway/Fly.io)
 
@@ -265,7 +265,7 @@ DELETE /api/leads/:id    # Delete lead
 npm run seed  # Run this after deployment to create test data
 ```
 
-## 🧪 Testing
+## Testing
 
 ### Test the deployed application with these scenarios:
 
@@ -292,7 +292,7 @@ npm run seed  # Run this after deployment to create test data
    - Test XSS protection (httpOnly cookies)
    - Verify input validation
 
-## 🎯 Evaluation Checklist
+## Evaluation Checklist
 
 - [x] JWT auth with httpOnly cookies (no localStorage)
 - [x] CRUD for leads with correct status codes
@@ -306,7 +306,7 @@ npm run seed  # Run this after deployment to create test data
 - [x] Advanced filtering with multiple operators
 - [x] Proper error handling and loading states
 
-## 🚀 Deployment
+## Deployment
 
 ### Live Demo
 - **Frontend**: Deploy to [Vercel](https://vercel.com)
@@ -334,11 +334,11 @@ Email: test@leadmanagement.com
 Password: password123
 ```
 
-**📋 See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions**
+** See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions**
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create your feature branch
@@ -346,10 +346,8 @@ Password: password123
 4. Push to the branch
 5. Open a Pull Request
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License.
 
 ---
-
-**Built with ❤️ for the Lead Management assignment**
